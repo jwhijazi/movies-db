@@ -5,6 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build-prod": "ng build --base-href https://jwhijazi.github.io/movies-db/",
+    "publish-prod": "ngh --dir dist/rxjs-training",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
