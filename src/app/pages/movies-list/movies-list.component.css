@@ -1,3 +1,16 @@
+.search-btn {
+    position: absolute;
+    top: 0px;
+    right: 5px;
+    font-size: 25px;
+}
+
+.total {
+    color: #919697;
+    text-align: right;
+    padding-right: 10px;
+}
+
 .movie-card {
     border: solid 1pt #f1eeee;
     border-radius: 5px;
@@ -92,6 +105,12 @@
 
 .runtime {
     font-size: 14px;
+}
+
+.pageof {
+    color: #ccc;
+    font-size: 12px;
+    text-align: center;
 }
 
 .spinner {

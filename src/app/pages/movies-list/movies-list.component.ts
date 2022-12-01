@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { catchError, of } from 'rxjs';
 import { Movie } from 'src/app/models';
 import { MovieService } from 'src/app/services/movie.service';
 
@@ -15,6 +16,7 @@ export class MoviesListComponent implements OnInit {
   year: number = -1;
 
   noMovies: boolean = false;
+  error?: string;
 
   movies: Movie[] = [
     // {
@@ -369,12 +371,22 @@ export class MoviesListComponent implements OnInit {
   }
 
   getData(){
+    if(this.title.length < 2)
+      return;
+
     this.movies = [];
     this.total = 0;
     this.noMovies = false;
     this.loading = true;
+    this.error = undefined;
 
-    this.service.searchMoviesByTitle(this.title, this.year).subscribe(
+    this.service.searchMoviesByTitle(this.title, this.year).pipe(
+      catchError(err=>{
+        this.loading = false;
+        this.error = err.error.Error;
+        return of();
+      })
+    ).subscribe(
       (data) => {
         if (data.total > 0) {
           this.total = data.total;

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { filter, from, map, mergeMap, Observable, switchMap, toArray } from 'rxjs';
+import { catchError, filter, from, map, mergeMap, Observable, switchMap, toArray } from 'rxjs';
 import { Data, Movie, Search, SearchResult } from '../models';
 import { environment } from 'src/environments/environment';
 
@@ -30,6 +30,9 @@ export class MovieService {
             total: response ? +result.totalResults : 0 };
           return d;
         }),
+        catchError((error)=>{
+          throw error;
+        })
       )
   }
 
